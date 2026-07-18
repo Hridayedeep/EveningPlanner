@@ -1,0 +1,105 @@
+{
+  "questionnaireId": "evening_planner_v1",
+  "title": "Plan My Evening",
+  "questions": [
+    {
+      "step": 1,
+      "id": "occasion",
+      "question": "Who's this evening for?",
+      "type": "single_select",
+      "maps_to_field": "occasion",
+      "required": true,
+      "options": [
+        { "value": "parents", "label": "Parents", "emoji": "👨‍👩‍👦" },
+        { "value": "friends", "label": "Friends", "emoji": "🧑‍🤝‍🧑" },
+        { "value": "partner", "label": "Partner", "emoji": "❤️" },
+        { "value": "date", "label": "Date", "emoji": "🌹" },
+        { "value": "solo", "label": "Solo", "emoji": "🧘" }
+      ]
+    },
+    {
+      "step": 2,
+      "id": "start_time",
+      "question": "When are you starting?",
+      "type": "time_picker",
+      "maps_to_field": "startTime",
+      "required": true,
+      "default": "current_time"
+    },
+    {
+      "step": 2,
+      "id": "duration",
+      "question": "How much time do you have?",
+      "type": "single_select",
+      "maps_to_field": "duration",
+      "required": true,
+      "options": [
+        { "value": "quick", "label": "Quick (1-2 hrs)", "minutes": 90 },
+        { "value": "evening", "label": "Evening (3-4 hrs)", "minutes": 210 },
+        { "value": "full_day", "label": "Full day", "minutes": 420 }
+      ]
+    },
+    {
+      "step": 3,
+      "id": "template",
+      "question": "What's the shape of the evening?",
+      "type": "single_select",
+      "maps_to_field": "template",
+      "required": true,
+      "options": [
+        { "value": "food_only", "label": "Just food", "triggers_step": null },
+        { "value": "activity_then_food", "label": "Activity, then food", "triggers_step": "activity_detail" },
+        { "value": "food_then_roam", "label": "Food, then roam around", "triggers_step": null },
+        { "value": "movie_then_food", "label": "Movie, then food", "triggers_step": null },
+        { "value": "event_then_food", "label": "Event, then food", "triggers_step": null, "requires": "spotify_event_match" }
+      ]
+    },
+    {
+      "step": "3b",
+      "id": "activity_detail",
+      "question": "What kind of activity?",
+      "type": "single_select",
+      "maps_to_field": "activityType",
+      "required": false,
+      "conditional_on": { "question_id": "template", "value": "activity_then_food" },
+      "options": [
+        { "value": "badminton", "label": "Badminton" },
+        { "value": "bowling", "label": "Bowling" },
+        { "value": "other", "label": "Something else" }
+      ]
+    },
+    {
+      "step": 4,
+      "id": "dietary_restrictions",
+      "question": "Anything to avoid?",
+      "subtext": "Pulled from Health app where available — adjust if needed.",
+      "type": "multi_select",
+      "maps_to_field": "restrictions",
+      "required": false,
+      "prefill_source": "HealthKit",
+      "options": [
+        { "value": "nuts", "label": "Nut allergy" },
+        { "value": "dairy", "label": "Dairy-free" },
+        { "value": "gluten", "label": "Gluten-free" },
+        { "value": "vegetarian", "label": "Vegetarian" },
+        { "value": "none", "label": "No restrictions", "exclusive": true }
+      ]
+    }
+  ],
+  "exampleAnswers": {
+    "occasion": "friends",
+    "start_time": "18:00",
+    "duration": "evening",
+    "template": "activity_then_food",
+    "activity_detail": "badminton",
+    "dietary_restrictions": ["nuts"]
+  },
+  "exampleOutputPlanRequest": {
+    "occasion": "Friends",
+    "startTime": "2026-07-18T18:00:00+05:30",
+    "durationMins": 210,
+    "template": "activity_then_food",
+    "activityType": "badminton",
+    "restrictions": ["nuts"]
+  }
+}
