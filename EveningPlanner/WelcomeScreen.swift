@@ -42,9 +42,25 @@ struct WelcomeScreen: View {
 
 private struct WelcomeContent: View {
     @EnvironmentObject private var flow: PlanFlowViewModel
+    @Environment(AuthenticationModel.self) private var authModel
 
     var body: some View {
         VStack(spacing: 24) {
+            HStack {
+                Spacer()
+                Button(role: .destructive) {
+                    Task {
+                        await authModel.logout()
+                    }
+                } label: {
+                    Image(systemName: "rectangle.portrait.and.arrow.right")
+                        .font(.title3)
+                        .foregroundColor(.red.opacity(0.8))
+                }
+                .padding(.top, 8)
+                .padding(.trailing, 8)
+            }
+
             Spacer()
 
             Text("Plan My Evening")
@@ -71,4 +87,5 @@ private struct WelcomeContent: View {
 
 #Preview {
     WelcomeScreen()
+        .environment(AuthenticationModel.forPreview())
 }
