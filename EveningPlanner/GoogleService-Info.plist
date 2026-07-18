@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>400649880078-lcpddf7sblqd7360j2ru6j48j9ak5mvs.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.400649880078-lcpddf7sblqd7360j2ru6j48j9ak5mvs</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCw47mSt963zW_jTbaYuG3BHGZ2LyDrckw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>400649880078</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.amit.EveningPlanner</string>
+	<key>PROJECT_ID</key>
+	<string>eveningplanner-94310</string>
+	<key>STORAGE_BUCKET</key>
+	<string>eveningplanner-94310.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:400649880078:ios:e2e71f5ef73ac0a78ab25f</string>
+</dict>
+</plist>

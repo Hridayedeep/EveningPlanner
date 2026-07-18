@@ -6,13 +6,46 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		7BBFA601300BBEC4004ABB1C /* FirebaseAI in Frameworks */ = {isa = PBXBuildFile; productRef = 7BBFA600300BBEC4004ABB1C /* FirebaseAI */; };
+		7BBFA603300BBEC4004ABB1C /* FirebaseAILogic in Frameworks */ = {isa = PBXBuildFile; productRef = 7BBFA602300BBEC4004ABB1C /* FirebaseAILogic */; };
+		7BBFA605300BBEC4004ABB1C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7BBFA604300BBEC4004ABB1C /* FirebaseAnalytics */; };
+		7BBFA607300BBEC4004ABB1C /* FirebaseAnalyticsCore in Frameworks */ = {isa = PBXBuildFile; productRef = 7BBFA606300BBEC4004ABB1C /* FirebaseAnalyticsCore */; };
+		7BBFA609300BBEC4004ABB1C /* FirebaseAnalyticsIdentitySupport in Frameworks */ = {isa = PBXBuildFile; productRef = 7BBFA608300BBEC4004ABB1C /* FirebaseAnalyticsIdentitySupport */; };
+		7BBFA60B300BBEC4004ABB1C /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 7BBFA60A300BBEC4004ABB1C /* FirebaseAppCheck */; };
+		7BBFA60D300BBEC4004ABB1C /* FirebaseAppDistribution-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 7BBFA60C300BBEC4004ABB1C /* FirebaseAppDistribution-Beta */; };
+		7BBFA60F300BBEC4004ABB1C /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7BBFA60E300BBEC4004ABB1C /* FirebaseAuth */; };
+		7BBFA611300BBEC4004ABB1C /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 7BBFA610300BBEC4004ABB1C /* FirebaseAuthCombine-Community */; };
+		7BBFA613300BBEC4004ABB1C /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 7BBFA612300BBEC4004ABB1C /* FirebaseCore */; };
+		7BBFA615300BBEC4004ABB1C /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7BBFA614300BBEC4004ABB1C /* FirebaseCrashlytics */; };
+		7BBFA617300BBEC4004ABB1C /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 7BBFA616300BBEC4004ABB1C /* FirebaseDatabase */; };
+		7BBFA619300BBEC4004ABB1C /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 7BBFA618300BBEC4004ABB1C /* FirebaseFirestore */; };
+		7BBFA61B300BBEC4004ABB1C /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 7BBFA61A300BBEC4004ABB1C /* FirebaseFirestoreCombine-Community */; };
+		7BBFA61D300BBEC4004ABB1C /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 7BBFA61C300BBEC4004ABB1C /* FirebaseFunctions */; };
+		7BBFA623300BC325004ABB1C /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 7BBFA622300BC325004ABB1C /* GoogleSignIn */; };
+		7BBFA625300BC325004ABB1C /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7BBFA624300BC325004ABB1C /* GoogleSignInSwift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		7BEF2B12300BA5C00019DCAF /* EveningPlanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EveningPlanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		7BBFA627300BC473004ABB1C /* Exceptions for "EveningPlanner" folder in "EveningPlanner" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 7BEF2B11300BA5C00019DCAF /* EveningPlanner */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		7BEF2B14300BA5C00019DCAF /* EveningPlanner */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				7BBFA627300BC473004ABB1C /* Exceptions for "EveningPlanner" folder in "EveningPlanner" target */,
+			);
 			path = EveningPlanner;
 			sourceTree = "<group>";
 		};
@@ -23,6 +56,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BBFA60D300BBEC4004ABB1C /* FirebaseAppDistribution-Beta in Frameworks */,
+				7BBFA623300BC325004ABB1C /* GoogleSignIn in Frameworks */,
+				7BBFA619300BBEC4004ABB1C /* FirebaseFirestore in Frameworks */,
+				7BBFA611300BBEC4004ABB1C /* FirebaseAuthCombine-Community in Frameworks */,
+				7BBFA603300BBEC4004ABB1C /* FirebaseAILogic in Frameworks */,
+				7BBFA609300BBEC4004ABB1C /* FirebaseAnalyticsIdentitySupport in Frameworks */,
+				7BBFA601300BBEC4004ABB1C /* FirebaseAI in Frameworks */,
+				7BBFA615300BBEC4004ABB1C /* FirebaseCrashlytics in Frameworks */,
+				7BBFA617300BBEC4004ABB1C /* FirebaseDatabase in Frameworks */,
+				7BBFA625300BC325004ABB1C /* GoogleSignInSwift in Frameworks */,
+				7BBFA605300BBEC4004ABB1C /* FirebaseAnalytics in Frameworks */,
+				7BBFA613300BBEC4004ABB1C /* FirebaseCore in Frameworks */,
+				7BBFA60B300BBEC4004ABB1C /* FirebaseAppCheck in Frameworks */,
+				7BBFA607300BBEC4004ABB1C /* FirebaseAnalyticsCore in Frameworks */,
+				7BBFA61D300BBEC4004ABB1C /* FirebaseFunctions in Frameworks */,
+				7BBFA60F300BBEC4004ABB1C /* FirebaseAuth in Frameworks */,
+				7BBFA61B300BBEC4004ABB1C /* FirebaseFirestoreCombine-Community in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +115,23 @@
 			);
 			name = EveningPlanner;
 			packageProductDependencies = (
+				7BBFA600300BBEC4004ABB1C /* FirebaseAI */,
+				7BBFA602300BBEC4004ABB1C /* FirebaseAILogic */,
+				7BBFA604300BBEC4004ABB1C /* FirebaseAnalytics */,
+				7BBFA606300BBEC4004ABB1C /* FirebaseAnalyticsCore */,
+				7BBFA608300BBEC4004ABB1C /* FirebaseAnalyticsIdentitySupport */,
+				7BBFA60A300BBEC4004ABB1C /* FirebaseAppCheck */,
+				7BBFA60C300BBEC4004ABB1C /* FirebaseAppDistribution-Beta */,
+				7BBFA60E300BBEC4004ABB1C /* FirebaseAuth */,
+				7BBFA610300BBEC4004ABB1C /* FirebaseAuthCombine-Community */,
+				7BBFA612300BBEC4004ABB1C /* FirebaseCore */,
+				7BBFA614300BBEC4004ABB1C /* FirebaseCrashlytics */,
+				7BBFA616300BBEC4004ABB1C /* FirebaseDatabase */,
+				7BBFA618300BBEC4004ABB1C /* FirebaseFirestore */,
+				7BBFA61A300BBEC4004ABB1C /* FirebaseFirestoreCombine-Community */,
+				7BBFA61C300BBEC4004ABB1C /* FirebaseFunctions */,
+				7BBFA622300BC325004ABB1C /* GoogleSignIn */,
+				7BBFA624300BC325004ABB1C /* GoogleSignInSwift */,
 			);
 			productName = EveningPlanner;
 			productReference = 7BEF2B12300BA5C00019DCAF /* EveningPlanner.app */;
@@ -94,6 +161,10 @@
 			);
 			mainGroup = 7BEF2B09300BA5C00019DCAF;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				7BBFA5FF300BBEC4004ABB1C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				7BBFA621300BC325004ABB1C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 7BEF2B13300BA5C00019DCAF /* Products */;
 			projectDirPath = "";
@@ -251,11 +322,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = EveningPlanner/EveningPlanner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2ALFF3RCXF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EveningPlanner/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -283,11 +356,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = EveningPlanner/EveningPlanner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2ALFF3RCXF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EveningPlanner/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -332,6 +407,113 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7BBFA5FF300BBEC4004ABB1C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.16.0;
+			};
+		};
+		7BBFA621300BC325004ABB1C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7BBFA600300BBEC4004ABB1C /* FirebaseAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7BBFA5FF300BBEC4004ABB1C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAI;
+		};
+		7BBFA602300BBEC4004ABB1C /* FirebaseAILogic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7BBFA5FF300BBEC4004ABB1C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAILogic;
+		};
+		7BBFA604300BBEC4004ABB1C /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7BBFA5FF300BBEC4004ABB1C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		7BBFA606300BBEC4004ABB1C /* FirebaseAnalyticsCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7BBFA5FF300BBEC4004ABB1C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsCore;
+		};
+		7BBFA608300BBEC4004ABB1C /* FirebaseAnalyticsIdentitySupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7BBFA5FF300BBEC4004ABB1C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsIdentitySupport;
+		};
+		7BBFA60A300BBEC4004ABB1C /* FirebaseAppCheck */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7BBFA5FF300BBEC4004ABB1C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAppCheck;
+		};
+		7BBFA60C300BBEC4004ABB1C /* FirebaseAppDistribution-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7BBFA5FF300BBEC4004ABB1C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseAppDistribution-Beta";
+		};
+		7BBFA60E300BBEC4004ABB1C /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7BBFA5FF300BBEC4004ABB1C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		7BBFA610300BBEC4004ABB1C /* FirebaseAuthCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7BBFA5FF300BBEC4004ABB1C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseAuthCombine-Community";
+		};
+		7BBFA612300BBEC4004ABB1C /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7BBFA5FF300BBEC4004ABB1C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		7BBFA614300BBEC4004ABB1C /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7BBFA5FF300BBEC4004ABB1C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		7BBFA616300BBEC4004ABB1C /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7BBFA5FF300BBEC4004ABB1C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		7BBFA618300BBEC4004ABB1C /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7BBFA5FF300BBEC4004ABB1C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		7BBFA61A300BBEC4004ABB1C /* FirebaseFirestoreCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7BBFA5FF300BBEC4004ABB1C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseFirestoreCombine-Community";
+		};
+		7BBFA61C300BBEC4004ABB1C /* FirebaseFunctions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7BBFA5FF300BBEC4004ABB1C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFunctions;
+		};
+		7BBFA622300BC325004ABB1C /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7BBFA621300BC325004ABB1C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		7BBFA624300BC325004ABB1C /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7BBFA621300BC325004ABB1C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7BEF2B0A300BA5C00019DCAF /* Project object */;
 }
