@@ -29,4 +29,7 @@ struct ItineraryVariant: Identifiable, Hashable {
     let id: Int
     let stops: [ItineraryStop]
     let totalCost: Int
+    /// Filled in lazily by ItineraryNarrationService once this variant is
+    /// actually viewed — never blocks itinerary generation itself.
+    var narration: String?
 }

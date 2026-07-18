@@ -40,11 +40,13 @@ struct Venue: Codable, Identifiable, Hashable {
         return pricePerHour ?? 0
     }
 
+    /// "🧍" for a solo booking, "👥" for a group — the emoji carries the
+    /// per-person-total context that used to be spelled out in words.
     func priceLabel(forGroupSize groupSize: Int) -> String {
         if let pricePerHour { return "\(PriceFormatter.rupees(pricePerHour))/hr" }
         if let pricePerHead {
-            guard groupSize > 1 else { return "\(PriceFormatter.rupees(pricePerHead))/person" }
-            return "\(PriceFormatter.rupees(pricePerHead * groupSize)) total"
+            guard groupSize > 1 else { return "\(PriceFormatter.rupees(pricePerHead)) 🧍" }
+            return "\(PriceFormatter.rupees(pricePerHead * groupSize)) 👥"
         }
         return "Free"
     }

@@ -37,6 +37,7 @@ final class PlanFlowViewModel: ObservableObject {
     let itineraryGenerator: ItineraryGenerator
     let eventLogger: EventLogger
     let userProfileServiceProvider: (SampleMusicPersona) -> UserProfileService
+    let narrationService: ItineraryNarrationService
 
     init(
         questionnaireProvider: QuestionnaireProvider = BundledQuestionnaireProvider(resourceName: "plan_my_evening_questionnaire"),
@@ -48,13 +49,15 @@ final class PlanFlowViewModel: ObservableObject {
                 AppleMusicHistoryProfileProvider(),
                 SampleMusicProfileProvider(persona: persona)
             ])
-        }
+        },
+        narrationService: ItineraryNarrationService = ItineraryNarrationService()
     ) {
         self.questionnaireProvider = questionnaireProvider
         self.venueRepository = venueRepository
         self.itineraryGenerator = itineraryGenerator
         self.eventLogger = eventLogger
         self.userProfileServiceProvider = userProfileServiceProvider
+        self.narrationService = narrationService
     }
 
     var selectedVariant: ItineraryVariant? {
@@ -123,6 +126,20 @@ final class PlanFlowViewModel: ObservableObject {
         } catch {
             generationError = "Couldn't load venues."
         }
+    }
+
+    /// Best-effort, on-demand: only generates a blurb for the variant
+    /// currently on screen, and only once. Called from ItineraryCardView's
+    /// .task(id: selectedVariantIndex) — never blocks itinerary display.
+    func loadNarrationIfNeeded() async {
+        guard variants.indices.contains(selectedVariantIndex) else { return }
+        let variant = variants[selectedVariantIndex]
+        guard variant.narration == nil else { return }
+
+        let text = await narrationService.blurb(for: variant, tags: planRequest.preferenceTags)
+
+        guard let currentIndex = variants.firstIndex(where: { $0.id == variant.id }) else { return }
+        variants[currentIndex].narration = text
     }
 
     func shuffle() {

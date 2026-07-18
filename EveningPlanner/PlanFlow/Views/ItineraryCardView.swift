@@ -12,6 +12,7 @@ import SwiftUI
 struct ItineraryCardView: View {
     @EnvironmentObject private var flow: PlanFlowViewModel
     @State private var feedbackGiven: Bool?
+    @State private var showShareSheet = false
 
     var body: some View {
         VStack(spacing: 20) {
@@ -20,6 +21,8 @@ struct ItineraryCardView: View {
             }
 
             if let variant = flow.selectedVariant {
+                narrationBlurb(variant)
+
                 ScrollView {
                     GlassEffectContainer(spacing: 16) {
                         VStack(spacing: 16) {
@@ -48,6 +51,39 @@ struct ItineraryCardView: View {
         .onChange(of: flow.selectedVariantIndex) { _, _ in
             feedbackGiven = nil
         }
+        .task(id: flow.selectedVariantIndex) {
+            await flow.loadNarrationIfNeeded()
+        }
+        .sheet(isPresented: $showShareSheet) {
+            if let variant = flow.selectedVariant {
+                ShareItinerarySheet(variant: variant)
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button(action: { showShareSheet = true }) {
+                    Image(systemName: "square.and.arrow.up")
+                }
+                .disabled(flow.selectedVariant == nil)
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func narrationBlurb(_ variant: ItineraryVariant) -> some View {
+        if let narration = variant.narration {
+            Text(narration)
+                .font(.subheadline.italic())
+                .foregroundStyle(.secondary)
+                .frame(maxWidth: .infinity, alignment: .leading)
+        } else {
+            Text("Thinking about why you'll love this tonight, one detail at a time.")
+                .font(.subheadline.italic())
+                .foregroundStyle(.secondary)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .redacted(reason: .placeholder)
+                .shimmering()
+        }
     }
 
     private var header: some View {
@@ -67,41 +103,43 @@ struct ItineraryCardView: View {
     private var feedbackRow: some View {
         HStack(spacing: 16) {
             Spacer()
-            Button(action: { giveFeedback(liked: true) }) {
-                Image(systemName: feedbackGiven == true ? "hand.thumbsup.fill" : "hand.thumbsup")
-                    .frame(width: 44, height: 44)
-            }
-            .glassEffect(
-                feedbackGiven == true ? .regular.tint(.accentColor).interactive() : .regular.interactive(),
-                in: .circle
+            feedbackButton(
+                isSelected: feedbackGiven == true,
+                systemImage: feedbackGiven == true ? "hand.thumbsup.fill" : "hand.thumbsup",
+                action: { giveFeedback(liked: true) }
             )
-
-            Button(action: { giveFeedback(liked: false) }) {
-                Image(systemName: feedbackGiven == false ? "hand.thumbsdown.fill" : "hand.thumbsdown")
-                    .frame(width: 44, height: 44)
-            }
-            .glassEffect(
-                feedbackGiven == false ? .regular.tint(.accentColor).interactive() : .regular.interactive(),
-                in: .circle
+            feedbackButton(
+                isSelected: feedbackGiven == false,
+                systemImage: feedbackGiven == false ? "hand.thumbsdown.fill" : "hand.thumbsdown",
+                action: { giveFeedback(liked: false) }
             )
             Spacer()
         }
         .font(.title3)
-        .foregroundStyle(Color.accentColor)
+    }
+
+    private func feedbackButton(isSelected: Bool, systemImage: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Image(systemName: systemImage)
+                .foregroundStyle(.white)
+                .frame(width: 44, height: 44)
+        }
+        .background(.ultraThinMaterial, in: Circle())
+        .overlay(
+            Circle().strokeBorder(
+                isSelected
+                    ? AnyShapeStyle(LinearGradient(colors: [.purple, .purple.opacity(0)], startPoint: .top, endPoint: .bottom))
+                    : AnyShapeStyle(Color.white.opacity(0.16)),
+                lineWidth: isSelected ? 2 : 1
+            )
+        )
     }
 
     private var actionButtons: some View {
-        VStack(spacing: 12) {
-            Button(action: { flow.bookNow() }) {
-                Text("Book now")
-            }
-            .buttonStyle(.primaryCTA)
-
-            Button(action: { flow.shuffle() }) {
-                Text("Shuffle / retry")
-            }
-            .buttonStyle(.secondaryCTA)
+        Button(action: { flow.bookNow() }) {
+            Text("Book now")
         }
+        .buttonStyle(.primaryCTA)
     }
 
     private func giveFeedback(liked: Bool) {
@@ -116,23 +154,14 @@ private struct TotalCostBanner: View {
 
     var body: some View {
         HStack {
-            VStack(alignment: .leading, spacing: 2) {
-                Text(groupSize > 1 ? "TOTAL FOR \(groupSize) TONIGHT" : "TOTAL FOR TONIGHT")
-                    .font(.caption2.weight(.bold))
-                    .tracking(1.2)
-                    .foregroundStyle(.secondary)
-                Text(PriceFormatter.rupees(totalCost))
-                    .font(.system(size: 32, weight: .heavy, design: .rounded))
-                    .foregroundStyle(
-                        LinearGradient(colors: [.accentColor, .purple], startPoint: .leading, endPoint: .trailing)
-                    )
-            }
+            Text(groupSize > 1 ? "TOTAL FOR \(groupSize) TONIGHT" : "TOTAL FOR TONIGHT")
+                .font(.caption2.weight(.bold))
+                .tracking(1.2)
+                .foregroundStyle(.secondary)
             Spacer()
-            Image(systemName: "indianrupeesign.circle.fill")
-                .font(.system(size: 38))
-                .foregroundStyle(
-                    LinearGradient(colors: [.accentColor, .purple], startPoint: .top, endPoint: .bottom)
-                )
+            Text(PriceFormatter.rupees(totalCost))
+                .font(.system(size: 22, weight: .medium, design: .rounded))
+                .foregroundStyle(.white)
         }
         .padding()
         .glassEffect(.regular.tint(.accentColor.opacity(0.35)), in: RoundedRectangle(cornerRadius: 20))
@@ -168,13 +197,8 @@ private struct StopCard: View {
             Spacer(minLength: 8)
 
             Text(stop.priceLabel)
-                .font(.subheadline.weight(.bold))
+                .font(.subheadline.weight(.semibold))
                 .foregroundStyle(.white)
-                .padding(.horizontal, 10)
-                .padding(.vertical, 6)
-                .background(
-                    Capsule().fill(LinearGradient(colors: [.green, .mint], startPoint: .leading, endPoint: .trailing))
-                )
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
