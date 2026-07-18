@@ -32,7 +32,7 @@ struct QuestionnaireView: View {
 
                 Spacer(minLength: 0)
 
-                nextButton(questionnaire: questionnaire)
+                navigationButtons(questionnaire: questionnaire)
                 progressBar(currentIndex: currentIndex, total: questionnaire.questions.count)
             } else if let error = flow.generationError {
                 Spacer()
@@ -80,21 +80,41 @@ struct QuestionnaireView: View {
         }
     }
 
-    private func nextButton(questionnaire: QuestionnaireDefinition) -> some View {
+    private func navigationButtons(questionnaire: QuestionnaireDefinition) -> some View {
         let question = questionnaire.questions[currentIndex]
         let isLastQuestion = currentIndex == questionnaire.questions.count - 1
+        let isFirstQuestion = currentIndex == 0
 
-        return Button(action: { advance(questionnaire: questionnaire) }) {
-            Text("Next")
-                .font(.headline)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 14)
+        return HStack(spacing: 12) {
+            if !isFirstQuestion {
+                Button(action: goBack) {
+                    HStack {
+                        Image(systemName: "chevron.left")
+                        Text("Previous")
+                    }
+                }
+                .buttonStyle(.secondaryCTA)
+            }
+
+            Button(action: { advance(questionnaire: questionnaire) }) {
+                HStack {
+                    Text(isLastQuestion ? "Finish" : "Next")
+                    Image(systemName: isLastQuestion ? "checkmark" : "chevron.right")
+                }
+            }
+            .buttonStyle(.primaryCTA)
+            .disabled(!isCurrentAnswerValid(question))
         }
-        .buttonStyle(.glassProminent)
-        .disabled(!isCurrentAnswerValid(question))
         .padding(.horizontal)
         .padding(.top, 8)
         .animation(nil, value: isLastQuestion)
+    }
+
+    private func goBack() {
+        guard currentIndex > 0 else { return }
+        withAnimation(.easeInOut(duration: 0.3)) {
+            currentIndex -= 1
+        }
     }
 
     private func advance(questionnaire: QuestionnaireDefinition) {
@@ -111,10 +131,10 @@ struct QuestionnaireView: View {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
                 Capsule()
-                    .fill(Color.clear)
-                    .glassEffect(.regular, in: Capsule())
+                    .fill(.ultraThinMaterial)
+                    .overlay(Capsule().strokeBorder(Color.white.opacity(0.14), lineWidth: 1))
                 Capsule()
-                    .fill(Color.accentColor)
+                    .fill(LinearGradient(colors: [.purple, .accentColor], startPoint: .leading, endPoint: .trailing))
                     .frame(width: geometry.size.width * CGFloat(currentIndex + 1) / CGFloat(total))
                     .animation(.easeInOut(duration: 0.35), value: currentIndex)
             }

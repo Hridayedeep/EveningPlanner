@@ -15,29 +15,33 @@ struct MultiSelectOptionsView: View {
     }
 
     var body: some View {
-        GlassEffectContainer(spacing: 12) {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 130), spacing: 12)], spacing: 12) {
-                ForEach(options) { option in
-                    let isSelected = selectedValues.contains(option.value)
-                    Button(action: { toggle(option) }) {
-                        HStack(spacing: 6) {
-                            if let emoji = option.emoji { Text(emoji) }
-                            Text(option.label)
-                        }
-                        .font(.subheadline.weight(.semibold))
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 14)
-                        .foregroundStyle(isSelected ? Color.white : Color.primary)
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 130), spacing: 12)], spacing: 12) {
+            ForEach(options) { option in
+                let isSelected = selectedValues.contains(option.value)
+                Button(action: { toggle(option) }) {
+                    HStack(spacing: 6) {
+                        if let emoji = option.emoji { Text(emoji) }
+                        Text(option.label)
                     }
-                    .buttonStyle(.plain)
-                    .glassEffect(
-                        isSelected ? .regular.tint(.accentColor).interactive() : .regular.interactive(),
-                        in: .capsule
-                    )
-                    .disabled(!option.isAvailable)
-                    .opacity(option.isAvailable ? 1 : 0.4)
-                    .animation(.easeInOut(duration: 0.2), value: isSelected)
+                    .font(.subheadline.weight(.semibold))
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 14)
+                    .foregroundStyle(.white)
+                    .contentShape(Rectangle())
                 }
+                .buttonStyle(.plain)
+                .background(.ultraThinMaterial, in: Capsule())
+                .overlay(
+                    Capsule().strokeBorder(
+                        isSelected
+                            ? AnyShapeStyle(LinearGradient(colors: [.purple, .purple.opacity(0)], startPoint: .leading, endPoint: .trailing))
+                            : AnyShapeStyle(Color.white.opacity(0.14)),
+                        lineWidth: isSelected ? 2 : 1
+                    )
+                )
+                .disabled(!option.isAvailable)
+                .opacity(option.isAvailable ? 1 : 0.4)
+                .animation(.easeInOut(duration: 0.2), value: isSelected)
             }
         }
     }

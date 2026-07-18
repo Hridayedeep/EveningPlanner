@@ -65,28 +65,26 @@ struct ItineraryCardView: View {
     }
 
     private var feedbackRow: some View {
-        GlassEffectContainer(spacing: 16) {
-            HStack(spacing: 16) {
-                Spacer()
-                Button(action: { giveFeedback(liked: true) }) {
-                    Image(systemName: feedbackGiven == true ? "hand.thumbsup.fill" : "hand.thumbsup")
-                        .frame(width: 44, height: 44)
-                }
-                .glassEffect(
-                    feedbackGiven == true ? .regular.tint(.accentColor).interactive() : .regular.interactive(),
-                    in: .circle
-                )
-
-                Button(action: { giveFeedback(liked: false) }) {
-                    Image(systemName: feedbackGiven == false ? "hand.thumbsdown.fill" : "hand.thumbsdown")
-                        .frame(width: 44, height: 44)
-                }
-                .glassEffect(
-                    feedbackGiven == false ? .regular.tint(.accentColor).interactive() : .regular.interactive(),
-                    in: .circle
-                )
-                Spacer()
+        HStack(spacing: 16) {
+            Spacer()
+            Button(action: { giveFeedback(liked: true) }) {
+                Image(systemName: feedbackGiven == true ? "hand.thumbsup.fill" : "hand.thumbsup")
+                    .frame(width: 44, height: 44)
             }
+            .glassEffect(
+                feedbackGiven == true ? .regular.tint(.accentColor).interactive() : .regular.interactive(),
+                in: .circle
+            )
+
+            Button(action: { giveFeedback(liked: false) }) {
+                Image(systemName: feedbackGiven == false ? "hand.thumbsdown.fill" : "hand.thumbsdown")
+                    .frame(width: 44, height: 44)
+            }
+            .glassEffect(
+                feedbackGiven == false ? .regular.tint(.accentColor).interactive() : .regular.interactive(),
+                in: .circle
+            )
+            Spacer()
         }
         .font(.title3)
         .foregroundStyle(Color.accentColor)
@@ -94,20 +92,15 @@ struct ItineraryCardView: View {
 
     private var actionButtons: some View {
         VStack(spacing: 12) {
-            Button(action: { flow.path.append(PlanFlowRoute.payment) }) {
+            Button(action: { flow.bookNow() }) {
                 Text("Book now")
-                    .font(.headline)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 14)
             }
-            .buttonStyle(.glassProminent)
+            .buttonStyle(.primaryCTA)
 
             Button(action: { flow.shuffle() }) {
                 Text("Shuffle / retry")
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 10)
             }
-            .buttonStyle(.glass)
+            .buttonStyle(.secondaryCTA)
         }
     }
 

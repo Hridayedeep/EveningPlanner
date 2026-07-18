@@ -25,6 +25,12 @@ final class PlanFlowViewModel: ObservableObject {
     /// See AppleMusicHistoryProfileProvider's header for why a sample is
     /// still needed alongside the real MusicKit call.
     @Published var selectedMusicPersona: SampleMusicPersona = .chillListener
+    /// The single "upcoming event" the Welcome screen's sticky banner
+    /// points at. Booking another evening overwrites it.
+    @Published var latestBooking: Booking?
+    /// Drives the auto-dismissing "Booking successful" overlay, owned at
+    /// the WelcomeScreen level so it survives the path reset that follows it.
+    @Published var showBookingSuccessPopup = false
 
     let questionnaireProvider: QuestionnaireProvider
     let venueRepository: VenueRepository
@@ -56,12 +62,19 @@ final class PlanFlowViewModel: ObservableObject {
         return variants[selectedVariantIndex]
     }
 
+    /// Apple Music prefill is unbound from the flow for now (no permission
+    /// screen calls into it) — flip this to re-enable once that's wired
+    /// back in, rather than deleting the prefill implementation.
+    private let prefillEnabled = false
+
     func loadQuestionnaireIfNeeded() async {
         guard questionnaire == nil else { return }
         do {
             let loaded = try await questionnaireProvider.loadQuestionnaire()
             questionnaire = loaded
-            await prefillFromInterestProfile(questions: loaded.questions)
+            if prefillEnabled {
+                await prefillFromInterestProfile(questions: loaded.questions)
+            }
         } catch {
             generationError = "Couldn't load the questionnaire."
         }
@@ -124,6 +137,20 @@ final class PlanFlowViewModel: ObservableObject {
     func logFeedback(liked: Bool) {
         guard let variant = selectedVariant else { return }
         eventLogger.log(.itineraryFeedback(variantId: variant.id, liked: liked))
+    }
+
+    /// Called from "Book now" — no payment screen anymore, this just
+    /// records the booking and shows the success popup. The popup itself
+    /// resets the flow back to the Welcome screen once it's done.
+    func bookNow() {
+        guard let variant = selectedVariant else { return }
+        latestBooking = Booking(variant: variant, bookedAt: Date())
+        showBookingSuccessPopup = true
+    }
+
+    func finishBookingSuccessPopup() {
+        showBookingSuccessPopup = false
+        reset()
     }
 
     func reset() {

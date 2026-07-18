@@ -46,19 +46,14 @@ struct AppleMusicPermissionView: View {
             VStack(spacing: 12) {
                 Button(action: allow) {
                     Text(isRequesting ? "Requesting…" : "Allow Apple Music access")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 14)
                 }
-                .buttonStyle(.glassProminent)
+                .buttonStyle(.primaryCTA)
                 .disabled(isRequesting)
 
                 Button(action: skip) {
                     Text("Not now")
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 10)
                 }
-                .buttonStyle(.glass)
+                .buttonStyle(.secondaryCTA)
                 .disabled(isRequesting)
             }
         }

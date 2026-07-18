@@ -19,43 +19,46 @@ struct SingleSelectOptionsView: View {
     }
 
     var body: some View {
-        GlassEffectContainer(spacing: 12) {
-            VStack(spacing: 12) {
-                ForEach(options) { option in
-                    let isSelected = selectedValue == option.value
-                    Button(action: { answer = .text(option.value) }) {
-                        HStack {
-                            Text(option.label).font(.headline)
-                            Spacer()
-                            if !option.isAvailable {
-                                Text(option.unavailableReason ?? "Unavailable")
-                                    .font(.caption2)
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 4)
-                                    .background(Color.secondary.opacity(0.15))
-                                    .clipShape(Capsule())
-                            } else if isSelected {
-                                Image(systemName: "checkmark.circle.fill")
-                                    .foregroundStyle(Color.accentColor)
-                            }
+        VStack(spacing: 12) {
+            ForEach(options) { option in
+                let isSelected = selectedValue == option.value
+                Button(action: { answer = .text(option.value) }) {
+                    HStack {
+                        Text(option.label)
+                            .font(.headline)
+                            .foregroundStyle(.white)
+                        Spacer()
+                        if !option.isAvailable {
+                            Text(option.unavailableReason ?? "Unavailable")
+                                .font(.caption2)
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 4)
+                                .background(Color.secondary.opacity(0.15))
+                                .clipShape(Capsule())
+                        } else if isSelected {
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundStyle(Color.purple)
                         }
-                        .padding()
-                        .frame(maxWidth: .infinity)
                     }
-                    .buttonStyle(.plain)
-                    .glassEffect(
-                        isSelected ? .regular.tint(.accentColor).interactive() : .regular.interactive(),
-                        in: RoundedRectangle(cornerRadius: 14)
-                    )
-                    .disabled(!option.isAvailable)
-                    .opacity(option.isAvailable ? 1 : 0.55)
-                    .animation(.easeInOut(duration: 0.2), value: isSelected)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .contentShape(Rectangle())
                 }
+                .buttonStyle(.plain)
+                .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 14))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 14)
+                        .strokeBorder(
+                            isSelected
+                                ? AnyShapeStyle(LinearGradient(colors: [.purple, .purple.opacity(0)], startPoint: .leading, endPoint: .trailing))
+                                : AnyShapeStyle(Color.white.opacity(0.14)),
+                            lineWidth: isSelected ? 2 : 1
+                        )
+                )
+                .disabled(!option.isAvailable)
+                .opacity(option.isAvailable ? 1 : 0.55)
+                .animation(.easeInOut(duration: 0.2), value: isSelected)
             }
-        }
-        .onAppear {
-            guard selectedValue == nil, let firstAvailable = options.first(where: { $0.isAvailable }) else { return }
-            answer = .text(firstAvailable.value)
         }
     }
 }
