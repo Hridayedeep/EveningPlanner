@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-// MARK: - Themes & Style Tokens
+// MARK: - Themes & Style Tokens₹
 struct Theme {
     static let darkBackground = Color(red: 0.05, green: 0.04, blue: 0.12)
     static let darkSecondary = Color(red: 0.10, green: 0.08, blue: 0.20)
