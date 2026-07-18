@@ -11,7 +11,7 @@ import SwiftUI
 struct EveningPlannerApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            WelcomeScreen()
         }
     }
 }
