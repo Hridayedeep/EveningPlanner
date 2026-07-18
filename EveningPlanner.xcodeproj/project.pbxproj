@@ -329,6 +329,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EveningPlanner/Info.plist;
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Evening Planner looks at your Apple Music listening history to personalize your evening recommendations.";
+				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "Evening Planner adds your planned stops to your calendar so you don't miss them.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -363,6 +365,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EveningPlanner/Info.plist;
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Evening Planner looks at your Apple Music listening history to personalize your evening recommendations.";
+				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "Evening Planner adds your planned stops to your calendar so you don't miss them.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
